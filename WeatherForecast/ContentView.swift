@@ -9,10 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack {
-            DayForecast(day: "Mon", isRainy: false, high: 20, low: 11)
-            DayForecast(day: "Tue", isRainy: true, high: 12, low: 5)
-            DayForecast(day: "Wed", isRainy: true, high: 10, low: 6)
+        ScrollView(.horizontal) {
+            HStack {
+                DayForecast(day: "Mon", isRainy: false, high: 20, low: 11)
+                DayForecast(day: "Tue", isRainy: true, high: 12, low: 5)
+                DayForecast(day: "Wed", isRainy: true, high: 10, low: 6)
+                DayForecast(day: "Thu", isRainy: false, high: 20, low: 11)
+                DayForecast(day: "Fri", isRainy: true, high: 12, low: 5)
+                DayForecast(day: "Sat", isRainy: false, high: 10, low: 6)
+                DayForecast(day: "Sun", isRainy: false, high: 20, low: 11)
+            }
         }
     }
 }
@@ -51,7 +57,7 @@ struct DayForecast: View {
             Image(systemName: iconName)
                 .foregroundStyle(iconColour)
                 .font(.largeTitle)
-                .padding(5)
+                .padding(2)
             
             Text("High: \(high)")
                 .fontWeight(.bold)
