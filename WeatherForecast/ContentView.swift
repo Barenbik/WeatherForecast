@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     let averageHighTemp = (20 + 12 + 10 + 20 + 12 + 10 + 20) / 7
     let averageLowTemp = (11 + 5 + 6 + 11 + 5 + 6 + 11) / 7
+    let numberOfSunnyDays = 4
+    let numberOfRainyDays = 3
     
     var body: some View {
         VStack {
@@ -33,7 +35,7 @@ struct ContentView: View {
                 .font(.title)
                 .padding()
             
-            WeekForecast(averageHighTemp: averageHighTemp, averageLowTemp: averageLowTemp, numberOfSunnyDays: 4, numberOfRainyDays: 3)
+            WeekForecast(averageHighTemp: averageHighTemp, averageLowTemp: averageLowTemp, numberOfSunnyDays: numberOfSunnyDays, numberOfRainyDays: numberOfRainyDays)
             
             Spacer()
         }
@@ -66,6 +68,14 @@ struct DayForecast: View {
         }
     }
     
+    var highTempColour: Color {
+        high > 14 ? Color.orange : Color.primary
+    }
+    
+    var lowTempColour: Color {
+        low < 6 ? Color.teal : Color.secondary
+    }
+    
     var body: some View {
         VStack {
             Text(day)
@@ -78,10 +88,11 @@ struct DayForecast: View {
             
             Text("High: \(high)")
                 .fontWeight(.bold)
+                .foregroundStyle(highTempColour)
             
             Text("Low: \(low)")
                 .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(lowTempColour)
         }
         .padding()
     }
@@ -99,18 +110,25 @@ struct WeekForecast: View {
                 .padding(.bottom)
             
             Text("Average high temperature")
+                .font(.headline)
+            
             Text("\(averageHighTemp)")
                 .padding(.bottom)
             
             Text("Average low temperature")
+                .font(.headline)
+            
             Text("\(averageLowTemp)")
                 .padding(.bottom)
             
             Text("Number of days with rain")
+                .font(.headline)
+            
             Text("\(numberOfRainyDays)")
                 .padding(.bottom)
             
             Text("Number of days with sun")
+                .font(.headline)
             
             Text("\(numberOfSunnyDays)")
                 .padding(.bottom)
